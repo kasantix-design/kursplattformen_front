@@ -1,23 +1,29 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function Notater() {
-  const [notat, setNotat] = useState("")
+  const [tekst, setTekst] = useState("")
 
-  const lagreNotat = () => {
-    localStorage.setItem("mineNotater", notat)
-    alert("Notat lagret!")
-  }
+  useEffect(() => {
+    const lagret = localStorage.getItem("notater")
+    if (lagret) setTekst(lagret)
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem("notater", tekst)
+  }, [tekst])
 
   return (
-    <div className="content-box">
-      <h2>Mine notater</h2>
-      <textarea
-        rows={12}
-        value={notat}
-        onChange={(e) => setNotat(e.target.value)}
-        style={{ width: "100%", padding: "1rem", borderRadius: "10px" }}
-      />
-      <button onClick={lagreNotat} className="btn">Lagre notat</button>
+    <div className="content-area">
+      <div className="content-box">
+        <h2>Dine notater</h2>
+        <textarea
+          rows={15}
+          style={{ width: "100%", padding: "1rem" }}
+          placeholder="Skriv ned tanker, refleksjoner eller ideer..."
+          value={tekst}
+          onChange={(e) => setTekst(e.target.value)}
+        />
+      </div>
     </div>
   )
 }
