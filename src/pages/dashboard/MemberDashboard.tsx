@@ -1,17 +1,34 @@
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export default function MemberDashboard() {
+  const navigate = useNavigate()
+
+  const brukerNavn = localStorage.getItem("username") || "medlem"
+
   return (
-    <div className="content-box">
-      <h2>Medlemsside</h2>
-      <p>Velkommen som medlem! Her finner du dine ressurser:</p>
-      <ul>
-        <li><Link to="/undervisning">Delta i live undervisning</Link></li>
-        <li><Link to="/opptak">Se opptak</Link></li>
-        <li><Link to="/kurs">Mine kurs</Link></li>
-        <li><Link to="/notater">Mine notater</Link></li>
-        <li><Link to="/profil">Min profil</Link></li>
-      </ul>
+    <div className="content-area">
+      <h1>Velkommen, {brukerNavn}!</h1>
+
+      <section className="content-box">
+        <h2>Ditt område</h2>
+        <div className="book-grid">
+          <button className="btn" onClick={() => navigate("/kurs")}>
+            Mine kurs
+          </button>
+          <button className="btn" onClick={() => navigate("/undervisning/opptak")}>
+            Tidligere opptak
+          </button>
+          <button className="btn" onClick={() => navigate("/blogg")}>
+            Les blogg
+          </button>
+          <button className="btn" onClick={() => navigate("/notater")}>
+            Notater
+          </button>
+          <button className="btn" onClick={() => navigate("/epost")}>
+            Kontakt admin
+          </button>
+        </div>
+      </section>
     </div>
   )
 }
