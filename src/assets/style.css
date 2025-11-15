@@ -1,0 +1,49 @@
+/* src/assets/style.css */
+:root {
+  --background: #F5F2E8;
+  --box: #F8E4D3;
+  --text: #2E2E2E;
+  --accent: #A8C3A0;
+  --shadow: rgba(0, 0, 0, 0.06);
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  font-family: "Lora", serif;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.btn {
+  background: var(--accent);
+  color: var(--text);
+  border: none;
+  padding: 0.9rem 1.8rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: .25s ease;
+}
+.btn:hover {
+  background: #9AB893;
+  transform: translateY(-2px);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: var(--background);
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+.content-box {
+  background: var(--box);
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  margin: 2rem auto;
+  box-shadow: 0 10px 30px var(--shadow);
+  max-width: 900px;
+}
