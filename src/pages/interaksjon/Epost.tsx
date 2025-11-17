@@ -1,5 +1,7 @@
 import { useState } from "react"
 
+const API_URL = import.meta.env.VITE_API_URL
+
 export default function Epost() {
   const [epost, setEpost] = useState("")
   const [melding, setMelding] = useState("")
@@ -8,7 +10,7 @@ export default function Epost() {
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    const res = await fetch("/api/epost", {
+    const res = await fetch(`${API_URL}/api/epost`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
