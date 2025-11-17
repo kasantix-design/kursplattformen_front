@@ -1,55 +1,39 @@
-import { useState } from "react"
+// 📄 src/router.tsx
+import { Routes, Route, Navigate } from "react-router-dom"
+import Login from "../pages/auth/Login"
+import Profile from "../pages/auth/Profile"
+import AdminDashboard from "../pages/dashboard/AdminDashboard"
+import MemberDashboard from "../pages/dashboard/MemberDashboard"
+import KursOversikt from "../pages/kurs/KursOversikt"
+import KursDetaljer from "../pages/kurs/KursDetaljer"
+import Leksjon from "../pages/kurs/Leksjon"
+import Live from "../pages/undervisning/Live"
+import Opptak from "../pages/undervisning/Opptak"
+import Notater from "../pages/interaksjon/Notater"
+import Blogg from "../pages/interaksjon/Blogg"
+import Kommentarer from "../pages/interaksjon/Kommentarer"
+import KjøpKurs from "../pages/betaling/KjøpKurs"
+import Betalingsstatus from "../pages/betaling/Betalingsstatus"
+import ProtectedRoute from "../components/ProtectedRoute"
 
-export default function Epost() {
-  const [epost, setEpost] = useState("")
-  const [melding, setMelding] = useState("")
-  const [status, setStatus] = useState("")
-
-  const handleSend = async (e: React.FormEvent) => {
-    e.preventDefault()
-
-    const res = await fetch("/api/epost", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ epost, melding }),
-    })
-
-    if (res.ok) {
-      setStatus("E-post sendt!")
-      setEpost("")
-      setMelding("")
-    } else {
-      setStatus("Feil ved sending.")
-    }
-  }
-
+export default function AppRoutes() {
   return (
-    <div className="content-area">
-      <div className="content-box">
-        <h2>Kontakt admin</h2>
-        <form onSubmit={handleSend}>
-          <label>Din e-post</label>
-          <input
-            type="email"
-            value={epost}
-            onChange={(e) => setEpost(e.target.value)}
-            required
-          />
-
-          <label>Melding</label>
-          <textarea
-            rows={8}
-            value={melding}
-            onChange={(e) => setMelding(e.target.value)}
-            required
-          />
-
-          <button type="submit" className="form-btn-green">Send e-post</button>
-        </form>
-        {status && <p>{status}</p>}
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/profil" element={<Profile />} />
+      <Route path="/admin" element={<ProtectedRoute role="admin"><AdminDashboard /></ProtectedRoute>} />
+      <Route path="/medlem" element={<ProtectedRoute role="medlem"><MemberDashboard /></ProtectedRoute>} />
+      <Route path="/kurs" element={<KursOversikt />} />
+      <Route path="/kurs/:id" element={<KursDetaljer />} />
+      <Route path="/kurs/:id/leksjon/:leksjonId" element={<Leksjon />} />
+      <Route path="/undervisning" element={<Live />} />
+      <Route path="/opptak" element={<Opptak />} />
+      <Route path="/notater" element={<Notater />} />
+      <Route path="/blogg" element={<Blogg />} />
+      <Route path="/kommentarer" element={<Kommentarer />} />
+      <Route path="/kjop" element={<KjøpKurs />} />
+      <Route path="/betaling" element={<Betalingsstatus />} />
+    </Routes>
   )
 }
