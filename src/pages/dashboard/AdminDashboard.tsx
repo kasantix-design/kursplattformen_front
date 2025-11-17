@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom"
 import BlogEditor from "../../components/BlogEditor"
 
+const API_URL = import.meta.env.VITE_API_URL
+
 export default function AdminDashboard() {
   const navigate = useNavigate()
 
   const handleNewPost = async (post: { title: string; content: string }) => {
     try {
-      const res = await fetch("/api/blogg", {
+      const res = await fetch(`${API_URL}/api/blogg`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
