@@ -1,25 +1,51 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+
+const API_URL = import.meta.env.VITE_API_URL
+
+type LiveVideo = {
+  id: string
+  tittel: string
+  url: string
+}
 
 export default function Live() {
+  const [sendinger, setSendinger] = useState<LiveVideo[]>([])
+  const [feil, setFeil] = useState("")
+
   useEffect(() => {
-    const domain = "meet.jit.si"
-    const options = {
-      roomName: "KursplattformDemoRom",
-      width: "100%",
-      height: 600,
-      parentNode: document.getElementById("jitsi-container"),
-      userInfo: {
-        displayName: "Deltaker",
-      },
+    const hentLive = async () => {
+      try {
+        const res = await fetch(`${API_URL}/api/video/live`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        if (!res.ok) throw new Error("Kunne ikke hente livesendinger")
+        const data = await res.json()
+        setSendinger(data)
+      } catch (err) {
+        setFeil("Feil ved henting av sendinger")
+      }
     }
-    // @ts-ignore
-    new window.JitsiMeetExternalAPI(domain, options)
+
+    hentLive()
   }, [])
 
   return (
     <div className="content-area">
-      <h2>Live undervisning</h2>
-      <div id="jitsi-container" style={{ width: "100%", height: 600 }} />
+      <h2>Direktesendinger</h2>
+      {feil && <p style={{ color: "red" }}>{feil}</p>}
+
+      {sendinger.length === 0 ? (
+        <p>Ingen aktive sendinger</p>
+      ) : (
+        sendinger.map((video) => (
+          <div key={video.id} className="content-box">
+            <h3>{video.tittel}</h3>
+            <a href={video.url} target="_blank" className="btn">Bli med</a>
+          </div>
+        ))
+      )}
     </div>
   )
 }
