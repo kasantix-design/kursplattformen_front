@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router-dom"
-import BlogEditor from "../../components/BlogEditor"
+// src/pages/dashboard/AdminDashboard.tsx
+import { useNavigate } from "react-router-dom";
+import BlogEditor from "../../components/BlogEditor";
 
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AdminDashboard() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleNewPost = async (post: { title: string; content: string }) => {
     try {
@@ -15,15 +16,15 @@ export default function AdminDashboard() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify(post),
-      })
+      });
 
-      if (!res.ok) throw new Error("Kunne ikke publisere")
-      alert("Innlegg publisert!")
+      if (!res.ok) throw new Error("Kunne ikke publisere");
+      alert("Innlegg publisert!");
     } catch (err) {
-      console.error(err)
-      alert("Feil ved publisering")
+      console.error(err);
+      alert("Feil ved publisering");
     }
-  }
+  };
 
   return (
     <div className="content-area">
@@ -38,6 +39,9 @@ export default function AdminDashboard() {
           <button className="btn" onClick={() => navigate("/undervisning")}>
             Start video
           </button>
+          <button className="btn" onClick={() => navigate("/videomote")}>
+            Start videomøte
+          </button>
           <button className="btn" onClick={() => navigate("/blogg")}>
             Se blogg
           </button>
@@ -49,6 +53,5 @@ export default function AdminDashboard() {
 
       <BlogEditor onSubmit={handleNewPost} />
     </div>
-  )
+  );
 }
-
