@@ -12,13 +12,20 @@ export default function Login() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 👇 Testbruker fallback (ingen backend)
+    // ✅ Testbrukere direkte i frontend
     if (email === "admin@test.no" && password === "1234") {
       localStorage.setItem("token", "test123");
-      localStorage.setItem("bruker", JSON.stringify({ role: "admin" }));
+      localStorage.setItem("bruker", JSON.stringify({ role: "admin", email }));
       return navigate("/admin");
     }
 
+    if (email === "medlem@test.no" && password === "1234") {
+      localStorage.setItem("token", "test123");
+      localStorage.setItem("bruker", JSON.stringify({ role: "medlem", email }));
+      return navigate("/medlem");
+    }
+
+    // 🔐 Ekte backend-innlogging
     try {
       const res = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
@@ -42,12 +49,6 @@ export default function Login() {
       <h2>Logg inn</h2>
       <form onSubmit={handleLogin}>
         <label>E-post</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <label>Passord</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        <button type="submit" className="btn">Logg inn</button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-      </form>
-    </div>
-  );
-}
+        <input
+          type="email"
+          value={email}
