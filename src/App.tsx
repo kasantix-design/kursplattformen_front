@@ -17,3 +17,14 @@ export default function App() {
     </>
   )
 }
+
+import Footer from './components/Footer';
+
+function App() {
+  return (
+    <>
+      {/* resten av innholdet */}
+      <Footer />
+    </>
+  );
+}
