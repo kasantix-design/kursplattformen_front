@@ -44,7 +44,12 @@ export default function Login() {
   };
 
   return (
-    <div className="content-box">
+    <div className="content-box login-page">
+      <img
+        src="/logo192.png"
+        alt="Logo"
+        style={{ width: "150px", display: "block", margin: "0 auto 2rem" }}
+      />
       <h2>Logg inn</h2>
       <form onSubmit={handleLogin}>
         <label>E-post</label>
@@ -62,6 +67,13 @@ export default function Login() {
           required
         />
         <button type="submit" className="btn">Logg inn</button>
+
+        <div style={{ marginTop: "1rem", textAlign: "center" }}>
+          <a href="#" onClick={() => alert("Funksjon for glemt passord kommer snart!")}>
+            Har du glemt passord?
+          </a>
+        </div>
+
         {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
     </div>
