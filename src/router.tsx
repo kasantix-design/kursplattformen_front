@@ -9,6 +9,7 @@ import KursDetaljer from "./pages/kurs/KursDetaljer";
 import Leksjon from "./pages/kurs/Leksjon";
 import Live from "./pages/undervisning/Live";
 import Opptak from "./pages/undervisning/Opptak";
+import Videomote from "./pages/undervisning/Videomote"; // ✅ NY
 import Notater from "./pages/interaksjon/Notater";
 import Blogg from "./pages/interaksjon/Blogg";
 import Kommentarer from "./pages/interaksjon/Kommentarer";
@@ -43,6 +44,14 @@ export default function AppRoutes() {
       <Route path="/kurs/:id/leksjon/:leksjonId" element={<Leksjon />} />
       <Route path="/undervisning" element={<Live />} />
       <Route path="/opptak" element={<Opptak />} />
+      <Route
+        path="/videomote"
+        element={
+          <ProtectedRoute role="admin">
+            <Videomote />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/notater" element={<Notater />} />
       <Route path="/blogg" element={<Blogg />} />
       <Route path="/kommentarer" element={<Kommentarer />} />
