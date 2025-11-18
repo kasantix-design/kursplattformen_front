@@ -50,6 +50,7 @@ export default function Login() {
         alt="Logo"
         style={{ width: "150px", display: "block", margin: "0 auto 2rem" }}
       />
+      <h1 style={{ textAlign: "center", marginTop: "1rem" }}>Kursplattformen</h1>
       <h2>Logg inn</h2>
       <form onSubmit={handleLogin}>
         <label>E-post</label>
