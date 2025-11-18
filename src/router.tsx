@@ -9,7 +9,8 @@ import KursDetaljer from "./pages/kurs/KursDetaljer";
 import Leksjon from "./pages/kurs/Leksjon";
 import Live from "./pages/undervisning/Live";
 import Opptak from "./pages/undervisning/Opptak";
-import Videomote from "./pages/undervisning/Videomote"; // ✅ NY
+import Videomote from "./pages/undervisning/Videomote"; // ✅ Admin starter møte
+import Delta from "./pages/undervisning/Delta"; // ✅ Medlem deltar i møte
 import Notater from "./pages/interaksjon/Notater";
 import Blogg from "./pages/interaksjon/Blogg";
 import Kommentarer from "./pages/interaksjon/Kommentarer";
@@ -49,6 +50,14 @@ export default function AppRoutes() {
         element={
           <ProtectedRoute role="admin">
             <Videomote />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/delta"
+        element={
+          <ProtectedRoute role="medlem">
+            <Delta />
           </ProtectedRoute>
         }
       />
