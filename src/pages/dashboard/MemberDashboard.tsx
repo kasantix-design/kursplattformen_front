@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 export default function MemberDashboard() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const brukerNavn = localStorage.getItem("username") || "medlem"
+  const brukerNavn = localStorage.getItem("username") || "medlem";
 
   return (
     <div className="content-area">
@@ -18,6 +18,9 @@ export default function MemberDashboard() {
           <button className="btn" onClick={() => navigate("/undervisning/opptak")}>
             Tidligere opptak
           </button>
+          <button className="btn" onClick={() => navigate("/videomote")}>
+            Delta i videomøte
+          </button>
           <button className="btn" onClick={() => navigate("/blogg")}>
             Les blogg
           </button>
@@ -30,5 +33,5 @@ export default function MemberDashboard() {
         </div>
       </section>
     </div>
-  )
+  );
 }
