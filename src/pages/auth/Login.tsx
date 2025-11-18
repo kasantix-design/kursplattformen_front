@@ -12,7 +12,7 @@ export default function Login() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // ✅ Testbrukere direkte i frontend
+    // ✅ Testbrukere i frontend
     if (email === "admin@test.no" && password === "1234") {
       localStorage.setItem("token", "test123");
       localStorage.setItem("bruker", JSON.stringify({ role: "admin", email }));
@@ -25,7 +25,6 @@ export default function Login() {
       return navigate("/medlem");
     }
 
-    // 🔐 Ekte backend-innlogging
     try {
       const res = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
@@ -52,3 +51,19 @@ export default function Login() {
         <input
           type="email"
           value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <label>Passord</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit" className="btn">Logg inn</button>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+      </form>
+    </div>
+  );
+}
