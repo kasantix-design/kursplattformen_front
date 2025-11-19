@@ -13,7 +13,7 @@ export default function Login() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // ✅ Testbrukere uten backend
+    // Testbrukere uten backend
     if (email === "admin@test.no" && password === "1234") {
       localStorage.setItem("token", "test123");
       localStorage.setItem("bruker", JSON.stringify({ role: "admin", email }));
@@ -58,6 +58,7 @@ export default function Login() {
         alt="Logo"
         style={{ width: "150px", display: "block", margin: "0 auto 2rem" }}
       />
+
       <h1 style={{ textAlign: "center", marginTop: "1rem" }}>Kursplattformen</h1>
       <h2 style={{ textAlign: "center" }}>Logg inn</h2>
 
@@ -69,6 +70,7 @@ export default function Login() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+
         <label>Passord</label>
         <input
           type="password"
@@ -89,4 +91,15 @@ export default function Login() {
             style={{ textDecoration: "none", color: "#444" }}
           >
             Har du glemt passord?
-            a>
+          </a>
+        </p>
+
+        {error && (
+          <p style={{ color: "red", textAlign: "center", marginTop: "1rem" }}>
+            {error}
+          </p>
+        )}
+      </form>
+    </div>
+  );
+}
