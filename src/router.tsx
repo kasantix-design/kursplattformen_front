@@ -10,7 +10,8 @@ import Leksjon from "./pages/kurs/Leksjon";
 import Live from "./pages/undervisning/Live";
 import Opptak from "./pages/undervisning/Opptak";
 import Videomote from "./pages/undervisning/Videomote"; // ✅ Admin starter møte
-import Delta from "./pages/undervisning/Delta"; // ✅ Medlem deltar i møte
+import Delta from "./pages/undervisning/Delta";         // ✅ Medlem deltar i møte
+import Kalender from "./pages/kalender/Kalender";       // ✅ Kalender lagt til
 import Notater from "./pages/interaksjon/Notater";
 import Blogg from "./pages/interaksjon/Blogg";
 import Kommentarer from "./pages/interaksjon/Kommentarer";
@@ -24,6 +25,7 @@ export default function AppRoutes() {
       <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<Login />} />
       <Route path="/profil" element={<Profile />} />
+
       <Route
         path="/admin"
         element={
@@ -36,36 +38,4 @@ export default function AppRoutes() {
         path="/medlem"
         element={
           <ProtectedRoute role="medlem">
-            <MemberDashboard />
-          </ProtectedRoute>
-        }
-      />
-      <Route path="/kurs" element={<KursOversikt />} />
-      <Route path="/kurs/:id" element={<KursDetaljer />} />
-      <Route path="/kurs/:id/leksjon/:leksjonId" element={<Leksjon />} />
-      <Route path="/undervisning" element={<Live />} />
-      <Route path="/opptak" element={<Opptak />} />
-      <Route
-        path="/videomote"
-        element={
-          <ProtectedRoute role="admin">
-            <Videomote />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/delta"
-        element={
-          <ProtectedRoute role="medlem">
-            <Delta />
-          </ProtectedRoute>
-        }
-      />
-      <Route path="/notater" element={<Notater />} />
-      <Route path="/blogg" element={<Blogg />} />
-      <Route path="/kommentarer" element={<Kommentarer />} />
-      <Route path="/kjop" element={<KjøpKurs />} />
-      <Route path="/betaling" element={<Betalingsstatus />} />
-    </Routes>
-  );
-}
+            <Mem
