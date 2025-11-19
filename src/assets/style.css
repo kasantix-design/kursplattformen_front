@@ -1,4 +1,6 @@
 /* src/assets/style.css */
+
+/* 🎨 Globale farger og variabler */
 :root {
   --background: #F5F2E8;
   --box: #F8E4D3;
@@ -7,14 +9,17 @@
   --shadow: rgba(0, 0, 0, 0.06);
 }
 
+/* 🌐 Grunnleggende stil */
 body {
   margin: 0;
+  padding: 0;
   background: var(--background);
   font-family: "Lora", serif;
   color: var(--text);
   line-height: 1.7;
 }
 
+/* 🔘 Knapper */
 .btn {
   background: var(--accent);
   color: var(--text);
@@ -24,21 +29,14 @@ body {
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
-  transition: .25s ease;
+  transition: 0.25s ease;
 }
 .btn:hover {
   background: #9AB893;
   transform: translateY(-2px);
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  background: var(--background);
-  border-bottom: 1px solid rgba(0,0,0,0.12);
-}
-
+/* 📦 Bokser */
 .content-box {
   background: var(--box);
   padding: 3rem 2rem;
@@ -46,4 +44,68 @@ body {
   margin: 2rem auto;
   box-shadow: 0 10px 30px var(--shadow);
   max-width: 900px;
+  color: var(--text);
+}
+
+/* 🔐 Login-side */
+.login-page {
+  display: block;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* 📄 Skjema-stil */
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* 📎 Lenker */
+a {
+  color: var(--text);
+  text-decoration: underline;
+  cursor: pointer;
+}
+a:hover {
+  color: #666;
+}
+
+/* 🧭 Navigasjonslinje */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--background);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* 📞 Varsling (hvis du bruker Notification-komponent) */
+.notification {
+  background: var(--accent);
+  color: var(--text);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  z-index: 1000;
 }
