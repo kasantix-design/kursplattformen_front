@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = import.meta.env.VITE_API_URL;
+// ✅ Fallback hvis VITE_API_URL mangler (Netlify, ZIP-upload etc.)
+const API_URL = import.meta.env.VITE_API_URL || "https://kursplattformenback-production.up.railway.app";
 
 export default function Login() {
   const [email, setEmail] = useState("");
