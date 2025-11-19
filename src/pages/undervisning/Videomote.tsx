@@ -1,25 +1,42 @@
-// src/pages/undervisning/Videomote.tsx
+import { useEffect } from "react";
+
+declare global {
+  interface Window {
+    JitsiMeetExternalAPI: any;
+  }
+}
+
 export default function Videomote() {
+  useEffect(() => {
+    const domain = "8x8.vc";
+    const roomName = "kursplattformen-fast-rom"; // Du kan bytte til dynamisk navn
+    const options = {
+      roomName: roomName,
+      parentNode: document.getElementById("jaas-container"),
+      width: "100%",
+      height: 600,
+      configOverwrite: {
+        startWithAudioMuted: true,
+        startWithVideoMuted: false,
+      },
+      interfaceConfigOverwrite: {
+        filmStripOnly: false,
+        SHOW_JITSI_WATERMARK: false,
+      },
+    };
+
+    if (window.JitsiMeetExternalAPI) {
+      new window.JitsiMeetExternalAPI(domain, options);
+    } else {
+      alert("JitsiMeet API kunne ikke lastes. Prøv igjen senere.");
+    }
+  }, []);
+
   return (
     <div className="content-area">
-      <h2>Startet møte – Jitsi</h2>
-      <p>Du er nå i et videomøte. Del lenken for å invitere andre.</p>
-
-      <div style={{ position: "relative", paddingTop: "56.25%" }}>
-        <iframe
-          src="https://meet.jit.si/InKasaLiveRom"
-          allow="camera; microphone; fullscreen; display-capture"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            border: 0,
-          }}
-          title="Videomøte"
-        />
-      </div>
+      <h1>Videomøte – Adminrom</h1>
+      <p>Del lenken med deltakere: <strong>https://kursplattformen.netlify.app/videomote</strong></p>
+      <div id="jaas-container" style={{ marginTop: "1rem", height: "600px" }}></div>
     </div>
   );
 }
