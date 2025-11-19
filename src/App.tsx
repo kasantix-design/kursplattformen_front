@@ -1,3 +1,4 @@
+// 📄 src/App.tsx
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -6,16 +7,18 @@ import Notification from "./components/Notification";
 import AppRoutes from "./router";
 
 export default function App() {
-  const [notis, setNotis] = useState("");
   const location = useLocation();
+  const [notis, setNotis] = useState("");
   const [isMounted, setIsMounted] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
   }, []);
 
   const isLoginPage = location.pathname === "/login";
-  const isLoggedIn = !!localStorage.getItem("token");
   const isUnknownPublicPage = isMounted && !isLoggedIn && !isLoginPage;
 
   return (
@@ -25,14 +28,16 @@ export default function App() {
       {isUnknownPublicPage && (
         <div className="content-box" style={{ textAlign: "center", marginTop: "4rem" }}>
           <h2>Du må logge inn</h2>
-          <p><a href="/login">Gå til innlogging</a></p>
+          <p>
+            <a href="/login">Gå til innlogging</a>
+          </p>
         </div>
       )}
 
       <AppRoutes />
 
       {isLoggedIn && !isLoginPage && <Footer />}
-      
+
       {notis && <Notification message={notis} onClose={() => setNotis("")} />}
     </>
   );
