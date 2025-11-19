@@ -33,21 +33,37 @@ export default function AdminDashboard() {
       <section className="content-box">
         <h2>Hurtigvalg</h2>
         <div className="book-grid">
+
+          {/* Kurs */}
           <button className="btn" onClick={() => navigate("/kurs")}>
             Se kurs
           </button>
+
+          {/* Undervisningsvideo */}
           <button className="btn" onClick={() => navigate("/undervisning")}>
             Start video
           </button>
+
+          {/* Videomøte (Jitsi) */}
           <button className="btn" onClick={() => navigate("/videomote")}>
             Start videomøte
           </button>
+
+          {/* Kalender-admin */}
+          <button className="btn" onClick={() => navigate("/kalender")}>
+            Kalender
+          </button>
+
+          {/* Blogg */}
           <button className="btn" onClick={() => navigate("/blogg")}>
             Se blogg
           </button>
+
+          {/* E-post */}
           <button className="btn" onClick={() => navigate("/epost")}>
             Send e-post
           </button>
+          
         </div>
       </section>
 
