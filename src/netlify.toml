@@ -1,13 +1,16 @@
 [build]
-  # 🏗️ Kommando for å bygge Vite-prosjektet
+  # 🏗️ Bygg Vite-prosjektet
   command = "npm run build"
-
-  # 📁 Mappen Netlify skal publisere fra etter build
   publish = "dist"
 
 [[redirects]]
-  # 🔁 Fang opp ALLE ruter og send dem til index.html
-  # Viktig for React-router (SPA)
+  # 🔁 Fanger opp alle ruter for SPA-routing (React-router)
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  # 🛠️ Fiks for MIME-type-problem: sørg for at .js får riktig content-type
+  for = "/assets/*"
+  [headers.values]
+    Content-Type = "application/javascript"
