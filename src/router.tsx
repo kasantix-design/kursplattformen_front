@@ -9,9 +9,9 @@ import KursDetaljer from "./pages/kurs/KursDetaljer";
 import Leksjon from "./pages/kurs/Leksjon";
 import Live from "./pages/undervisning/Live";
 import Opptak from "./pages/undervisning/Opptak";
-import Videomote from "./pages/undervisning/Videomote"; // ✅ Admin starter møte
-import Delta from "./pages/undervisning/Delta";         // ✅ Medlem deltar i møte
-import Kalender from "./pages/kalender/Kalender";       // ✅ Kalender lagt til
+import Videomote from "./pages/undervisning/Videomote"; 
+import Delta from "./pages/undervisning/Delta";
+import Kalender from "./pages/kalender/Kalender";
 import Notater from "./pages/interaksjon/Notater";
 import Blogg from "./pages/interaksjon/Blogg";
 import Kommentarer from "./pages/interaksjon/Kommentarer";
@@ -22,6 +22,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 export default function AppRoutes() {
   return (
     <Routes>
+      {/* Standard routing */}
       <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<Login />} />
       <Route path="/profil" element={<Profile />} />
@@ -34,6 +35,7 @@ export default function AppRoutes() {
           </ProtectedRoute>
         }
       />
+
       <Route
         path="/medlem"
         element={
@@ -46,6 +48,7 @@ export default function AppRoutes() {
       <Route path="/kurs" element={<KursOversikt />} />
       <Route path="/kurs/:id" element={<KursDetaljer />} />
       <Route path="/kurs/:id/leksjon/:leksjonId" element={<Leksjon />} />
+
       <Route path="/undervisning" element={<Live />} />
       <Route path="/opptak" element={<Opptak />} />
 
@@ -57,6 +60,7 @@ export default function AppRoutes() {
           </ProtectedRoute>
         }
       />
+
       <Route
         path="/delta"
         element={
@@ -65,6 +69,7 @@ export default function AppRoutes() {
           </ProtectedRoute>
         }
       />
+
       <Route
         path="/kalender"
         element={
@@ -79,6 +84,9 @@ export default function AppRoutes() {
       <Route path="/kommentarer" element={<Kommentarer />} />
       <Route path="/kjop" element={<KjøpKurs />} />
       <Route path="/betaling" element={<Betalingsstatus />} />
+
+      {/* 🚨 Fallback – sender alt ukjent til login */}
+      <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );
 }
