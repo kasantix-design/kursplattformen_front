@@ -38,4 +38,47 @@ export default function AppRoutes() {
         path="/medlem"
         element={
           <ProtectedRoute role="medlem">
-            <Mem
+            <MemberDashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route path="/kurs" element={<KursOversikt />} />
+      <Route path="/kurs/:id" element={<KursDetaljer />} />
+      <Route path="/kurs/:id/leksjon/:leksjonId" element={<Leksjon />} />
+      <Route path="/undervisning" element={<Live />} />
+      <Route path="/opptak" element={<Opptak />} />
+
+      <Route
+        path="/videomote"
+        element={
+          <ProtectedRoute role="admin">
+            <Videomote />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/delta"
+        element={
+          <ProtectedRoute role="medlem">
+            <Delta />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/kalender"
+        element={
+          <ProtectedRoute role="admin">
+            <Kalender />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route path="/notater" element={<Notater />} />
+      <Route path="/blogg" element={<Blogg />} />
+      <Route path="/kommentarer" element={<Kommentarer />} />
+      <Route path="/kjop" element={<KjøpKurs />} />
+      <Route path="/betaling" element={<Betalingsstatus />} />
+    </Routes>
+  );
+}
