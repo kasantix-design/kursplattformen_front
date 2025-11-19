@@ -1,3 +1,4 @@
+// 📄 src/router/AppRoutes.tsx
 import { Routes, Route, Navigate } from "react-router-dom"
 import Login from "../pages/auth/Login"
 import Profile from "../pages/auth/Profile"
@@ -8,6 +9,9 @@ import KursDetaljer from "../pages/kurs/KursDetaljer"
 import Leksjon from "../pages/kurs/Leksjon"
 import Live from "../pages/undervisning/Live"
 import Opptak from "../pages/undervisning/Opptak"
+import Videomote from "../pages/undervisning/Videomote"
+import Delta from "../pages/undervisning/Delta"
+import Kalender from "../pages/kalender/Kalender"
 import Notater from "../pages/interaksjon/Notater"
 import Blogg from "../pages/interaksjon/Blogg"
 import Kommentarer from "../pages/interaksjon/Kommentarer"
@@ -18,6 +22,7 @@ import ProtectedRoute from "../components/ProtectedRoute"
 export default function AppRoutes() {
   return (
     <Routes>
+      {/* Standard */}
       <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<Login />} />
       <Route path="/profil" element={<Profile />} />
@@ -34,7 +39,7 @@ export default function AppRoutes() {
         </ProtectedRoute>
       } />
 
-      {/* Kurs og innhold */}
+      {/* Kurs */}
       <Route path="/kurs" element={<KursOversikt />} />
       <Route path="/kurs/:id" element={<KursDetaljer />} />
       <Route path="/kurs/:id/leksjon/:leksjonId" element={<Leksjon />} />
@@ -42,6 +47,21 @@ export default function AppRoutes() {
       {/* Undervisning */}
       <Route path="/undervisning" element={<Live />} />
       <Route path="/opptak" element={<Opptak />} />
+      <Route path="/videomote" element={
+        <ProtectedRoute role="admin">
+          <Videomote />
+        </ProtectedRoute>
+      } />
+      <Route path="/delta" element={
+        <ProtectedRoute role="medlem">
+          <Delta />
+        </ProtectedRoute>
+      } />
+      <Route path="/kalender" element={
+        <ProtectedRoute role="admin">
+          <Kalender />
+        </ProtectedRoute>
+      } />
 
       {/* Interaksjon */}
       <Route path="/notater" element={<Notater />} />
@@ -51,6 +71,9 @@ export default function AppRoutes() {
       {/* Betaling */}
       <Route path="/kjop" element={<KjøpKurs />} />
       <Route path="/betaling" element={<Betalingsstatus />} />
+
+      {/* 🚨 Fallback */}
+      <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   )
 }
