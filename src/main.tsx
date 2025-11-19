@@ -7,17 +7,21 @@ import App from "./App";
 // ✅ Global stil
 import "./assets/style.css";
 
-// 🎯 Sørg for at root-elementet finnes før du prøver å mounte
-const rootElement = document.getElementById("root");
+function bootstrapApp() {
+  const rootElement = document.getElementById("root");
 
-if (!rootElement) {
-  throw new Error("Fant ikke #root-elementet i index.html");
+  if (!rootElement) {
+    console.error("❌ Fant ikke <div id='root'> i index.html");
+    return;
+  }
+
+  ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  );
 }
 
-ReactDOM.createRoot(rootElement).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
-);
+bootstrapApp();
