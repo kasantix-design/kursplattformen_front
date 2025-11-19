@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
-import { format } from "date-fns";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { addHours, parseISO } from "date-fns";
 
-const localizer = momentLocalizer(require("moment")); // bruker moment.js internt
+// 🔥 Viktig: ESM-import, IKKE require()
+import moment from "moment";
+
+const localizer = momentLocalizer(moment);
 
 type EventType = {
   title: string;
