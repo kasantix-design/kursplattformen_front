@@ -26,6 +26,7 @@ function bootstrapApp() {
       </BrowserRouter>
     </React.StrictMode>
   );
+  
 
   console.log("🚀 React er mountet.");
 }
