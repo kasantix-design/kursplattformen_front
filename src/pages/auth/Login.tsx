@@ -89,3 +89,4 @@ export default function Login() {
             style={{ textDecoration: "none", color: "#444" }}
           >
             Har du glemt passord?
+            a>
