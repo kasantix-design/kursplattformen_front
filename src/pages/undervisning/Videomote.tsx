@@ -9,26 +9,40 @@ declare global {
 export default function Videomote() {
   useEffect(() => {
     const domain = "8x8.vc";
-    const roomName = "kursplattformen-fast-rom"; // Du kan bytte til dynamisk navn
-    const options = {
-      roomName: roomName,
-      parentNode: document.getElementById("jaas-container"),
-      width: "100%",
-      height: 600,
-      configOverwrite: {
-        startWithAudioMuted: true,
-        startWithVideoMuted: false,
-      },
-      interfaceConfigOverwrite: {
-        filmStripOnly: false,
-        SHOW_JITSI_WATERMARK: false,
-      },
+    const roomName = "kursplattformen-fast-rom";
+
+    const loadJitsi = () => {
+      if (window.JitsiMeetExternalAPI) {
+        const options = {
+          roomName,
+          parentNode: document.getElementById("jaas-container"),
+          width: "100%",
+          height: 600,
+          configOverwrite: {
+            startWithAudioMuted: true,
+            startWithVideoMuted: false,
+          },
+          interfaceConfigOverwrite: {
+            filmStripOnly: false,
+            SHOW_JITSI_WATERMARK: false,
+          },
+        };
+        new window.JitsiMeetExternalAPI(domain, options);
+      }
     };
 
-    if (window.JitsiMeetExternalAPI) {
-      new window.JitsiMeetExternalAPI(domain, options);
+    // Dynamisk last script hvis det ikke finnes
+    if (!window.JitsiMeetExternalAPI) {
+      const script = document.createElement("script");
+      script.src = "https://8x8.vc/vpaas-magic-cookie-515a9e2c706c441b806d7de6424c4fb7/external_api.js";
+      script.async = true;
+      script.onload = loadJitsi;
+      script.onerror = () => {
+        console.error("🚨 Klarte ikke å laste Jitsi-script.");
+      };
+      document.body.appendChild(script);
     } else {
-      alert("JitsiMeet API kunne ikke lastes. Prøv igjen senere.");
+      loadJitsi();
     }
   }, []);
 
