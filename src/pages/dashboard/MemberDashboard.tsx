@@ -18,8 +18,11 @@ export default function MemberDashboard() {
           <button className="btn" onClick={() => navigate("/undervisning/opptak")}>
             Tidligere opptak
           </button>
-          <button className="btn" onClick={() => navigate("/videomote")}>
+          <button className="btn" onClick={() => navigate("/delta")}>
             Delta i videomøte
+          </button>
+          <button className="btn" onClick={() => navigate("/kalender")}>
+            Kalender
           </button>
           <button className="btn" onClick={() => navigate("/blogg")}>
             Les blogg
