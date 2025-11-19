@@ -37,11 +37,17 @@ export default function Login() {
       if (!res.ok) throw new Error("Feil e-post eller passord");
 
       const data = await res.json();
+
+      if (!data.token || !data.user || !data.user.role) {
+        throw new Error("Ugyldig respons fra server");
+      }
+
       localStorage.setItem("token", data.token);
       localStorage.setItem("bruker", JSON.stringify(data.user));
+
       navigate(data.user.role === "admin" ? "/admin" : "/medlem");
     } catch (err: any) {
-      setError(err.message || "Noe gikk galt");
+      setError(err.message || "Noe gikk galt under innlogging.");
     }
   };
 
@@ -83,11 +89,3 @@ export default function Login() {
             style={{ textDecoration: "none", color: "#444" }}
           >
             Har du glemt passord?
-          </a>
-        </p>
-
-        {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
-      </form>
-    </div>
-  );
-}
