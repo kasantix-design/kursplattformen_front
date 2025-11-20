@@ -1,0 +1,10 @@
+# ✅ netlify.toml – full og oppdatert
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[[redirects]]
+  # 🔁 Viktig for React Router (SPA)
+  from = "/*"
+  to = "/index.html"
+  status = 200
