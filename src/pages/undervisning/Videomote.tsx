@@ -1,3 +1,4 @@
+// 📄 src/pages/undervisning/Videomote.tsx
 import { useEffect } from "react";
 
 declare global {
@@ -9,7 +10,7 @@ declare global {
 export default function Videomote() {
   useEffect(() => {
     const domain = "8x8.vc";
-    const roomName = "kursplattformen-fast-rom";
+    const roomName = "vpaas-magic-cookie-515a9e2c706c441b806d7de6424c4fb7/kursplattformen-fast-rom";
 
     const loadJitsi = () => {
       if (window.JitsiMeetExternalAPI) {
@@ -18,20 +19,25 @@ export default function Videomote() {
           parentNode: document.getElementById("jaas-container"),
           width: "100%",
           height: 600,
+          userInfo: {
+            displayName: "Admin",
+          },
           configOverwrite: {
             startWithAudioMuted: true,
             startWithVideoMuted: false,
+            prejoinPageEnabled: true, // 👈 Vis "Join Meeting"-skjerm
           },
           interfaceConfigOverwrite: {
             filmStripOnly: false,
             SHOW_JITSI_WATERMARK: false,
+            SHOW_CHROME_EXTENSION_BANNER: false,
           },
         };
         new window.JitsiMeetExternalAPI(domain, options);
       }
     };
 
-    // Dynamisk last script hvis det ikke finnes
+    // Last script dynamisk hvis det ikke finnes
     if (!window.JitsiMeetExternalAPI) {
       const script = document.createElement("script");
       script.src = "https://8x8.vc/vpaas-magic-cookie-515a9e2c706c441b806d7de6424c4fb7/external_api.js";
@@ -49,7 +55,10 @@ export default function Videomote() {
   return (
     <div className="content-area">
       <h1>Videomøte – Adminrom</h1>
-      <p>Del lenken med deltakere: <strong>https://kursplattformen.netlify.app/videomote</strong></p>
+      <p>
+        Del denne lenken med deltakere:{" "}
+        <strong>https://kursplattformen.netlify.app/videomote</strong>
+      </p>
       <div id="jaas-container" style={{ marginTop: "1rem", height: "600px" }}></div>
     </div>
   );
